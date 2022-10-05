@@ -1,0 +1,101 @@
+.post {
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+    margin: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 1px;
+    bottom: 0.5px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #000000;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #000000;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+}
+
+.slider.round {
+    border-radius: 17px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+#darkswitch {
+    display: flex;
+    align-items: center;
+}
+
+.reglogform {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    padding: 10px 0 10px 0;
+}
+
+input.form-control.mx-auto.w-auto::placeholder::-webkit-input-placeholder {
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
+input.form-control.mx-auto.w-auto::placeholder::-moz-placeholder {
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
+input.form-control.mx-auto.w-auto::placeholder::-ms-placeholder {
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
+input.form-control.mx-auto.w-auto::placeholder {
+    color: #8e8e8e;
+    font-size: 12px;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Delaygram is an Instagram clone" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="/static/styles.css" rel="stylesheet" />
+        <title>Delaygram {% block title %}{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro-v6@18657a9/css/all.min.css" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        
+
+    </head>
+    <body style="background-color: rgb(250, 250, 250);">
+        {% if isLogged %}
+        <div class="border-bottom" style="background-color: white">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white px-5">
+                    <a class="navbar-brand" href="/">𝓓𝓮𝓵𝓪𝔂𝓰𝓻𝓪𝓶</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <form action="/search" method="GET" class="form-inline ml-auto my-2 my-lg-0">
+                            <input class="form-control ml-5 mr-sm-2 input-field" type="search" name="username" placeholder="Search" aria-label="Search">
+                        </form>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item ml-2" id="darkswitch"><label class="switch"><input type="checkbox"><span class="slider round"></span></label></li>
+                            <li class="nav-item ml-2"><a class="nav-link" href="/"><i class="fa-light fa-house fa-xl"></i></a></li>
+                            <li class="nav-item ml-2"><a class="nav-link" href="#" type="button" data-toggle="modal" data-target="#postModal"><i class="fa-light fa-circle-plus fa-xl"></i></a></li>
+                            <li class="nav-item ml-2"><a class="nav-link" href="#"><i class="fa-light fa-heart fa-xl"></i></a></li>
+                            <li class="nav-item ml-2"><a class="nav-link" href="/profile"><image src="{{ user.pfp }}" class="rounded-circle" style="width: 24px;" alt="Avatar" /></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="postModalLabel">Create new post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="was-validated" action="/post" method="POST" enctype="multipart/form-data">
+                            <div class="d-flex flex-column align-items-center mb-5">
+                                <h3>Select photo to post (PNG/JPG files only)</h3>
+                                <div class="custom-file mb-5">
+                                    <input name="postImage" type="file" class="custom-file-input" id="validatedPostFile" accept=".jpg,.jpeg,.png" required>
+                                    <label class="custom-file-label" for="validatedPostFile">Choose file...</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                </div>
+                                <div class="post-description mb-5">
+                                    <textarea name="postDesc" class="form-control" id="postDescription" rows="3" placeholder="Write a caption..." required></textarea>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <main>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="warning">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <div class="container p-5">{% block main %} {% endblock %}</div>
+        </main>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            $('#validatedPostFile').on('change', function(event) {
+                
+                var fileName = $(this).val();
+                $(this).next('.custom-file-label').html(fileName.split('\\').pop());
+
+            })
+        </script>
+    </body>
+</html>

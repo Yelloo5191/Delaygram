@@ -1,0 +1,31 @@
+{% extends "layout.html" %} 
+
+{% block title %} Register {% endblock %} 
+
+{% block main%}
+    <div class="card reglogform" style="width: 350px">
+        <h1 style="text-align: center; user-select: none;">𝓓𝓮𝓵𝓪𝔂𝓰𝓻𝓪𝓶</h1>
+        <p style="margin: auto; text-align: center; user-select: none;">Sign up to see photos and videos from your friends.</p>
+        <hr/>
+        <form action="/register" method="post">
+            <div class="mb-3">
+                <input autocomplete="off" autofocus="" class="form-control mx-auto w-auto" name="fullname" placeholder="Full Name" type="text" style="color: #262626;" required>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required>
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required>
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm Password" type="password" required>
+            </div>
+            <div class="mb-3" style="text-align: center;">
+                <button class="btn btn-primary" style="background-color: #0095f6; border-color: #0095f6;" type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+    <div class="card reglogform" style="width: 350px;">
+        <p style="margin: auto; text-align: center; user-select: none;">Have an account? <a href="/login" style="text-decoration: none;">Log in</a></p>
+    </div>
+{% endblock %}

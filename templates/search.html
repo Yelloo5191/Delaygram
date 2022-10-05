@@ -1,0 +1,29 @@
+{% extends "layout.html" %} 
+
+{% block title %} Search {% endblock %} 
+
+{% block main%}
+    {% if qusers[0] is defined %}
+        {% for user in qusers %}
+            <div class="card mb-3 post" style="width: 470px;">
+                <div class="card-header bg-white">
+                    <div class="row text-center align-items-center px-2">
+                        <div class="mr-1">
+                            <image src="{{ user.pfp }}" class="rounded-circle" style="width: 32px;" alt="Avatar" />
+                        </div>
+                        <p style="margin: 0;">{{ user.username }}</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>{{ user.fullname }}</p>
+                    <p>{{ user.bio }}</p>
+                    <p>{{ user.timestamp }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            No users found.
+        </div>
+    {% endif %}
+{% endblock %}
