@@ -1,3 +1,4 @@
+from tkinter.tix import Select
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 import flask_session as fse
 
@@ -8,15 +9,12 @@ from sqlalchemy.orm import declarative_base, Session
 from sqlalchemy.pool import StaticPool
 
 from static.core import Base, login_required
-from static.schemas import User, Post, Like
+from static.schemas import User, Post, Like, Comment
 
 from datetime import datetime
 
-import base64
-import sys
 from io import BufferedReader
 from imagekitio import ImageKit
-from PIL import Image
 
 import os
 from dotenv import load_dotenv
@@ -333,6 +331,39 @@ def like():
             ss.commit()
 
         return redirect(url_for(".index"))
+
+@app.route("/comment", methods=["POST"])
+@login_required
+def comment():
+
+    if request.form.get("status") == "new":
+        with Session(engine) as ss:
+
+            user = select(User).where(User.id==session["user_id"])
+            user = ss.execute(user).scalars().all()[0]
+
+            post = select(Post).where(Post.id==request.form.get("post_id"))
+            post = ss.execute(post).scalars().all()[0]
+
+            post.comments += 1
+    elif request.form.get("status") == "del":
+        with Session(engine) as ss:
+
+            user = select(User).where(User.id==session["user_id"])
+            user = ss.execute(user).scalar().all()[0]
+
+            post = select(Post).where(Post.id==request.form.get("post_id"))
+            post = ss.execute(post).scalars().all()[0]
+
+            post.comments -= 1
+
+            comment = select(Comment).where(Comment.id==request.form.get("comment_id"))
+            comment = ss.execute(comment).scalars().all()[0]
+
+            stmt = delete(Comment).where(Comment.id==request.form.get("comment_id"))
+            ss.execute(stmt)
+
+        
 
 @app.route("/error")
 def error():
