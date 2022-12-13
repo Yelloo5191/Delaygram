@@ -103,9 +103,14 @@ def profile():
         # # session.commit()
         user = select(User).where(User.id==session["user_id"])
         user = ss.execute(user).scalars().all()[0]
+
+        posts = select(Post).where(Post.userid==session["user_id"]).order_by(Post.timestamp.desc())
+        posts = ss.execute(posts).scalars().all()
+
+        postcount = len(posts)
         
 
-    return render_template("profile.html", user=user, isLogged=True)
+    return render_template("profile.html", user=user, posts=posts, postcount=postcount, isLogged=True)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
